@@ -133,8 +133,20 @@ class AuthorController extends Controller
      */
     public function actionDelete(int $id): Response
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
+        // Есть ли у автора книги?
+        if ($model->getBookAuthors()->exists()) {
+            \Yii::$app->session->setFlash(
+                'error',
+                'Нельзя удалить автора, у которого есть книги. Сначала удалите или переназначьте книги.'
+            );
+            return $this->redirect(['index']);
+        }
+
+        $model->delete();
+
+        \Yii::$app->session->setFlash('success', 'Автор удалён.');
         return $this->redirect(['index']);
     }
 

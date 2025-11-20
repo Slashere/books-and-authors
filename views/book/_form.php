@@ -19,7 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'year')->textInput() ?>
 
-    <?= $form->field($model, 'authorIds')->checkboxList($authorsList) ?>
+    <?= $form->field($model, 'authorIds')->checkboxList($authorsList, [
+        'unselect' => null,
+    ]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 

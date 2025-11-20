@@ -144,6 +144,7 @@ class BookController extends Controller
     {
         $this->findModel($id)->delete();
 
+        \Yii::$app->session->setFlash('success', 'Книга удалена.');
         return $this->redirect(['index']);
     }
 

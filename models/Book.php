@@ -83,13 +83,14 @@ class Book extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @throws InvalidConfigException
      */
-    public function extraFields(): array
+    public function afterFind(): void
     {
-        return [];
-    }
+        parent::afterFind();
 
+        $this->authorIds = $this->getAuthors()->select('id')->column();
+    }
 
     /**
      * {@inheritdoc}
