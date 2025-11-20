@@ -1,5 +1,8 @@
 <?php
 
+use app\services\BookService;
+use app\services\NotificationService;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -45,7 +48,15 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                'report/top-authors/<year:\d{4}>' => 'report/top-authors',
+            ],
+        ],
+    ],
+    'container' => [
+        'definitions' => [
+            NotificationService::class => NotificationService::class,
+            BookService::class => BookService::class,
         ],
     ],
     'params' => $params,
@@ -57,14 +68,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.*.*', '172.17.0.1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.*.*', '172.17.0.1'],
     ];
 }
 
