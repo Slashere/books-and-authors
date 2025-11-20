@@ -9,7 +9,6 @@ use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use yii\base\InvalidConfigException;
-//use app\services\NotificationService;
 
 /**
  * This is the model class for table "book".
@@ -133,30 +132,6 @@ class Book extends ActiveRecord
     public static function getAuthorsList(): array
     {
         return ArrayHelper::map(Author::find()->all(), 'id', 'full_name');
-    }
-
-    /**
-     * @throws Exception|InvalidConfigException
-     */
-    public function afterSave($insert, $changedAttributes): void
-    {
-        parent::afterSave($insert, $changedAttributes);
-
-//        // Обновляем связи авторов
-//        if (!empty($this->authorIds)) {
-//            BookAuthor::deleteAll(['book_id' => $this->id]);
-//            foreach ($this->authorIds as $authorId) {
-//                $ba = new BookAuthor();
-//                $ba->book_id = $this->id;
-//                $ba->author_id = $authorId;
-//                $ba->save(false);
-//            }
-//        }
-//
-//        // Появилась новая книга от автора, шлем SMS подписчикам
-//        if ($insert) {
-//            NotificationService::notifyNewBook($this);
-//        }
     }
 
     /**

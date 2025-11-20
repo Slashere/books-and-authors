@@ -25,12 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'isbn') ?>
 
-    <?php // echo $form->field($model, 'cover_path') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

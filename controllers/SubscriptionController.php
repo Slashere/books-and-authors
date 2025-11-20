@@ -6,9 +6,9 @@ use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use app\models\Author;
 use app\models\Subscription;
-use yii\web\Response;
 
 class SubscriptionController extends Controller
 {

@@ -41,9 +41,6 @@ class BookSearch extends Book
     public function search(array $params, string|null $formName = null): ActiveDataProvider
     {
         $query = Book::find();
-
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -51,12 +48,9 @@ class BookSearch extends Book
         $this->load($params, $formName);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'year' => $this->year,
