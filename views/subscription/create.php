@@ -15,7 +15,9 @@ $this->title = 'Подписка на автора: ' . $author->full_name;
 
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'phone')->textInput(['placeholder' => '+79991234567']) ?>
+<?= $form->errorSummary($model) ?>
+
+<?= $form->field($model, 'phone')->textInput(['placeholder' => '+79999999999']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Подписаться', ['class' => 'btn btn-success']) ?>
