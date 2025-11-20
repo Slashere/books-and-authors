@@ -61,13 +61,24 @@ class Book extends ActiveRecord
     {
         return [
             [['title', 'year', 'authorIds'], 'required'],
-            [['year'], 'integer'],
+            [['year'], 'integer', 'min' => 1500, 'max' => (int)date('Y') + 1,
+                'tooSmall' => 'Год выпуска не может быть меньше {min}.',
+                'tooBig'   => 'Год выпуска не может быть больше {max}.',
+            ],
             [['description'], 'string'],
             [['title', 'cover_path'], 'string', 'max' => 255],
-            [['isbn'], 'string', 'max' => 20],
+            [['isbn'], 'filter', 'filter' => 'trim'],
+            [['isbn'], 'string', 'max' => 13],
+            ['isbn', 'match',
+                'pattern' => '/^\d{10}(\d{3})?$/',
+                'message' => 'ISBN должен состоять из 10 или 13 цифр без пробелов и дефисов.',
+            ],
             [['authorIds'], 'each', 'rule' => ['integer']],
-            [['coverFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxSize' => 5 * 1024 * 1024],
-//            [['coverFile'], 'safe'],
+            [['coverFile'], 'file',
+                'skipOnEmpty' => true,
+                'extensions' => 'png, jpg, jpeg',
+                'maxSize' => 5 * 1024 * 1024
+            ],
         ];
     }
 
