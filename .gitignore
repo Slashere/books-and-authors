@@ -31,3 +31,6 @@ tests/_support/_generated
 
 # enviroment files
 .env
+
+# covers files
+web/uploads/covers/*
